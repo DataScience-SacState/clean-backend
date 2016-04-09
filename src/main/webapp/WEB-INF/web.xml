@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+        version="2.5">
+    <display-name>Auth0 Servlet Example</display-name>
+    <!-- Servlets -->
+    <servlet>
+        <servlet-name>WebApp</servlet-name>
+        <servlet-class>edu.csus.datascience.cleanbackend.webapp.WebAppServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectCallback</servlet-name>
+        <servlet-class>com.auth0.Auth0ServletCallback</servlet-class>
+        <init-param>
+            <param-name>auth0.redirect_on_success</param-name>
+            <param-value>/</param-value>
+        </init-param>
+        <init-param>
+            <param-name>auth0.redirect_on_error</param-name>
+            <param-value>/login</param-value>
+        </init-param>
+    </servlet>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>edu.csus.datascience.cleanbackend.LoginServlet</servlet-class>
+    </servlet>
+
+    <!-- Servlet Mappings -->
+    <servlet-mapping>
+        <servlet-name>WebApp</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectCallback</servlet-name>
+        <url-pattern>/callback</url-pattern>
+    </servlet-mapping>
+
+    <!-- Filters -->
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>com.auth0.Auth0Filter</filter-class>
+        <init-param>
+            <param-name>auth0.redirect_on_authentication_error</param-name>
+            <param-value>/login</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/</url-pattern>
+    </filter-mapping>
+
+    <!-- Auth0 Configuration -->
+    <context-param>
+        <param-name>auth0.client_id</param-name>
+        <param-value>tMhGths7WYZtiOsXL4C6zi2vOfluNMYO</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>auth0.client_secret</param-name>
+        <param-value>M-z_G4eHZKaxHTEpQmRQd53a-d-dQSN7KG5GI5xFlyIlOUWSCjdQHp28FsyZKl_X</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>auth0.domain</param-name>
+        <param-value>mattmerr47.auth0.com</param-value>
+    </context-param>
+
+</web-app>

@@ -1,4 +1,4 @@
-package edu.csus.datascience.cleanbackend;
+package edu.csus.datascience.cleanbackend.rest;
 
 import java.io.*;
 import java.math.BigInteger;

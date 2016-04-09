@@ -1,4 +1,4 @@
-package edu.csus.datascience.cleanbackend;
+package edu.csus.datascience.cleanbackend.rest;
 
 /**
  * Created by merrillm on 4/8/16.

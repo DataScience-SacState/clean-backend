@@ -1,4 +1,4 @@
-package edu.csus.datascience.cleanbackend;
+package edu.csus.datascience.cleanbackend.rest;
 
 import org.springframework.jdbc.core.RowMapper;
 
@@ -13,9 +13,13 @@ public class EventMapper implements RowMapper<Event> {
     public Event mapRow(ResultSet rs, int rowNum) throws SQLException {
         Event event = new Event(rs.getString("id"));
         event.setReporter(rs.getString("reporter"));
+        event.setDescription(rs.getString("description"));
+
+        event.setLatitude(rs.getString("latitude"));
+        event.setLongitude(rs.getString("longitude"));
+
         event.setTimeReported(rs.getString("timeReported"));
         event.setTimeCompleted(rs.getString("timeCompleted"));
-        event.setDescription(rs.getString("description"));
         return event;
     }
 

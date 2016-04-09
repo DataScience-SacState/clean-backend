@@ -1,9 +1,10 @@
-package edu.csus.datascience.cleanbackend;
+package edu.csus.datascience.cleanbackend.rest;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
-import javax.xml.crypto.Data;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,8 +28,9 @@ public class EventJDBCTemplate implements EventDAO {
 
     @Override
     public void create(String id, String reporter, String description, String latitude, String longitude) {
-        String SQL = "insert into Event (id, reporter, description, latitude, longitude) values (?, ?, ?, ?, ?)";
-        jdbcTemplateObject.update( SQL, id, reporter, description, latitude, longitude);
+        String SQL = "insert into Event (id, reporter, description, latitude, longitude, timeReported) values (?, ?, ?, ?, ?, ?)";
+        String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        jdbcTemplateObject.update(  SQL, id, reporter, description, latitude, longitude, timeStamp);
         System.out.printf("Created Record ID = %s Name = %s Description = '%s' Latitude = %s, Longitude = %s\n", id + "", reporter, description, latitude, longitude);
         return;
     }
@@ -44,6 +46,15 @@ public class EventJDBCTemplate implements EventDAO {
     public List<Event> listEvents() {
         String SQL = "select * from Event";
         List<Event> events = jdbcTemplateObject.query(SQL, new EventMapper());
+        return events;
+    }
+
+    @Override
+    public List<Event> listEventsSince(String time) {
+        String SQL = "select * from Event where timeReported > ?";
+        System.out.println(SQL);
+        List<Event> events = jdbcTemplateObject.query(SQL,
+                new Object[]{time}, new EventMapper());
         return events;
     }
 

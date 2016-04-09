@@ -1,4 +1,4 @@
-package edu.csus.datascience.cleanbackend;
+package edu.csus.datascience.cleanbackend.rest;
 
 import javax.sql.DataSource;
 import java.util.List;
@@ -33,7 +33,12 @@ public interface EventDAO {
      */
     public List<Event> listEvents();
 
-    /*
+    /**
+     * List records after given timeStamp.
+     */
+    public List<Event> listEventsSince(String time);
+
+    /**
      * Used to delete an Event from Event table.
      */
     public void delete(String id);
