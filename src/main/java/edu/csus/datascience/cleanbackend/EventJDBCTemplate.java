@@ -21,6 +21,11 @@ public class EventJDBCTemplate implements EventDAO {
     }
 
     @Override
+    public DataSource getDataSource() {
+        return dataSource;
+    }
+
+    @Override
     public void create(String id, String reporter, String description, String latitude, String longitude) {
         String SQL = "insert into Event (id, reporter, description, latitude, longitude) values (?, ?, ?, ?, ?)";
         jdbcTemplateObject.update( SQL, id, reporter, description, latitude, longitude);

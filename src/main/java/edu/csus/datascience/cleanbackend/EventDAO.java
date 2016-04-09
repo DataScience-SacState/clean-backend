@@ -14,6 +14,11 @@ public interface EventDAO {
     public void setDataSource(DataSource ds);
 
     /**
+     * Return database resources for modification.
+     */
+    public DataSource getDataSource();
+
+    /**
      * Create a record in Event table.
      */
     public void create(String id, String reporter, String description, String latitude, String longitude);
