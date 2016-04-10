@@ -36,10 +36,17 @@ public class EventController {
         return "success";
     }
 
-    @RequestMapping("/list")
+    @RequestMapping("/list.json")
     public List<Event> list(
-            @RequestParam(value="where", required=false, defaultValue="true") String where,
+            @RequestParam(value="since", required=false) String since,
             Model model) {
+
+        List<Event> list;
+        if (since == null)
+            list = eventJDBCTemplate.listEvents();
+        else {
+            eventJDBCTemplate.listEventsSince(since);
+        }
 
         return eventJDBCTemplate.listEvents();
     }
