@@ -7,6 +7,7 @@
 
     <context:property-placeholder />
 
+
     <!-- Initialization for data source -->
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -16,10 +17,14 @@
         <property name="password" value="${DB_PASSWORD}"/>
     </bean>
 
-    <!-- Definition for studentJDBCTemplate bean -->
+    <!-- Definition for eventJDBCTemplate bean -->
     <bean id="eventJDBCTemplate"
           class="edu.csus.datascience.cleanbackend.rest.EventJDBCTemplate">
         <property name="dataSource"  ref="dataSource" />
     </bean>
 
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/templates/" />
+        <property name="suffix" value=".html" />
+    </bean>
 </beans>

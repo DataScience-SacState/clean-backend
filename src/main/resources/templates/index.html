@@ -6,5 +6,25 @@
 </head>
 <body>
 <p th:text="'Hello, ' + ${name} + '!'" />
+<button onclick="window.signin();">Login</button>
 </body>
+
+<footer>
+    <script src="https://cdn.auth0.com/js/lock-9.0.min.js"></script>
+    <script type="text/javascript">
+
+        var lock = new Auth0Lock('tMhGths7WYZtiOsXL4C6zi2vOfluNMYO', 'mattmerr47.auth0.com');
+
+
+        function signin() {
+            lock.show({
+                callbackURL: ''
+                , responseType: 'code'
+                , authParams: {
+                    scope: 'openid profile'
+                }
+            });
+        }
+    </script>
+</footer>
 </html>

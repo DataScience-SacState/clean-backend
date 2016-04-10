@@ -1,4 +1,4 @@
-package edu.csus.datascience.cleanbackend.webapp;
+package edu.csus.datascience.cleanbackend;
 
 import com.auth0.Auth0User;
 
@@ -13,14 +13,14 @@ import java.io.IOException;
  * Created by merrillm on 4/9/16.
  */
 @WebServlet
-public class WebAppServlet extends HttpServlet {
-
+public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
-
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException
+    {
         resp.setContentType("text/html");
         resp.setStatus(HttpServletResponse.SC_OK);
         resp.getWriter().println("<!DOCTYPE html>\n" +
@@ -33,7 +33,6 @@ public class WebAppServlet extends HttpServlet {
 
         // This is the same as Request.getSession().getAttribute("user");
         Auth0User user = Auth0User.get(request);
-        System.out.println(user.getName());
 
         resp.getWriter().println("<h1>Welcome</h1>");
         resp.getWriter().println("<img src=\"" + user.getPicture() + "\" />");
