@@ -24,6 +24,11 @@ In order to use this REST service, you must host a MySQL database and pass in th
  - longitude
   - required: true
 
+/create?reporter=David&description=memes&latitude=420&longitude=blazeit
+```JavaScript
+success
+```
+
 ### /list
 ###### Get data for all Incidents
 #### Parameters:
