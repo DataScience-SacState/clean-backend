@@ -14,15 +14,14 @@ In order to use this REST service, you must host a MySQL database and pass in th
 ### /create | /report
 ###### Create new Incident
 #### Parameters:
- - Auth0 Token
+ - reporter
+  - required: no
+  - default: 311
+ - description
   - required: true
- - Auth0 Secret
+ - latitude
   - required: true
- - Description
-  - required: true
- - Latitude
-  - required: true
- - Longitude
+ - longitude
   - required: true
 
 ### /list
@@ -47,7 +46,7 @@ In order to use this REST service, you must host a MySQL database and pass in th
 ```
 
 ### /since | /listsince
-###### Get data for all Incidents
+###### Get data for all Incidents after given time
 #### Parameters:
  - time
   - required: true
