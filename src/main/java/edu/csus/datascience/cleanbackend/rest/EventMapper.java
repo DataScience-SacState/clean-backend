@@ -14,6 +14,7 @@ public class EventMapper implements RowMapper<Event> {
         Event event = new Event(rs.getString("id"));
         event.setReporter(rs.getString("reporter"));
         event.setDescription(rs.getString("description"));
+        event.setType(rs.getString("type"));
 
         event.setLatitude(rs.getString("latitude"));
         event.setLongitude(rs.getString("longitude"));

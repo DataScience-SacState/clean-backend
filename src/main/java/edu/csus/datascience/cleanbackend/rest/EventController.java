@@ -1,5 +1,7 @@
 package edu.csus.datascience.cleanbackend.rest;
 
+import edu.csus.datascience.cleanbackend.Application;
+import jdk.nashorn.internal.parser.JSONParser;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.ui.Model;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
@@ -19,8 +22,8 @@ public class EventController {
     private EventJDBCTemplate eventJDBCTemplate;
 
     {
-        context = new ClassPathXmlApplicationContext("Beans.xml");
-        eventJDBCTemplate = (EventJDBCTemplate)context.getBean("eventJDBCTemplate");
+        context = Application.context;
+        eventJDBCTemplate = Application.eventJDBCTemplate;
     }
 
     @RequestMapping(value={"/create", "/report"})
@@ -42,9 +45,9 @@ public class EventController {
             Model model) {
 
         List<Event> list;
-        if (since == null)
+        if (since == null) {
             list = eventJDBCTemplate.listEvents();
-        else {
+        } else {
             eventJDBCTemplate.listEventsSince(since);
         }
 

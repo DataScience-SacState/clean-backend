@@ -1,5 +1,6 @@
 package edu.csus.datascience.cleanbackend.rest;
 
+import edu.csus.datascience.cleanbackend.ApplicationTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
@@ -72,5 +73,22 @@ public class EventJDBCTemplate implements EventDAO {
         jdbcTemplateObject.update(SQL, timeCompleted, id);
         System.out.printf("Updated Record with ID = %s\n", id);
         return;
+    }
+
+    public void update(Event e) {
+        String SQL = "select * from Event where id=?";
+        List<Event> events = jdbcTemplateObject.query(SQL,
+                new Object[]{e.getId()}, new EventMapper());
+
+        if (events.isEmpty()) {
+            SQL = "insert into Event (id, reporter, description, type, latitude, longitude, timeReported, timeCompleted) values (?, ?, ?, ?, ?, ?, ?, ?)";
+            jdbcTemplateObject.update(  SQL, e.getId(), e.getReporter(), e.getDescription(), e.getType(), e.getLatitude(), e.getLongitude(), e.getTimeReported(), e.getTimeCompleted());
+            ApplicationTest.printRecord(e);
+            return;
+        } else {
+            SQL = "UPDATE Event SET type=? WHERE id=?";
+            jdbcTemplateObject.update(SQL, e.getType(), e.getId());
+        }
+
     }
 }

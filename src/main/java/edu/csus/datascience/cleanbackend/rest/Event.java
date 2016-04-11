@@ -9,11 +9,12 @@ public class Event {
 
     private String reporter;
     private String description;
-    private String timeReported;
+    private String type;
 
     private String latitude;
     private String longitude;
 
+    private String timeReported;
     private String timeCompleted;
 
     public Event() {
@@ -57,6 +58,13 @@ public class Event {
     }
     public String getDescription() {
         return description;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+    public String getType() {
+        return type;
     }
 
     public void setLatitude(String latitude) {
